@@ -1,4 +1,7 @@
-
+/*
+ *   ATENCION: las vueltas de los servicios están sin tipar (todos los servicios devuelven any)
+ *   Se deben crear los interfaces necesarios a partir de la documentacion de ergast
+ */
 
 interface IErgastService {
   getDrivers(): angular.IPromise<any>;
