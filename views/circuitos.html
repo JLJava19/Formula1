@@ -1,0 +1,35 @@
+<h2>{{vm.titulo}}</h2>
+
+<div class="row">
+    <div class="col">
+
+        <input type="text" ng-model="filtro.circuitName" placeholder="Nombre Circuito">
+        <input type="text" ng-model="filtro.Location.country" placeholder="Pais">
+
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" ng-click="campo='circuitName'; orden = !orden;">nombre</th>
+                <th scope="col" ng-click="campo='Location.country'; orden = !orden;">Pais</th>
+                <th scope="col">Ciudad</th>                
+                <th scope="col">Información</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="c in vm.circuitos | filter: filtro | orderBy:campo:orden ">
+                <td>{{c.circuitName}}</td>
+                <td>{{c.Location.country}}</td>
+                <td>{{c.Location.locality}}</td>
+                <td><a ng-href="{{c.url}}" target="_blank">Wikipedia</a></td>
+              </tr>              
+            </tbody>
+          </table>
+
+    </div>
+    <div class="col">
+        <h3>Mapa</h3>
+       
+        {{ vm.markers }}
+        
+    </div>
+</div>
