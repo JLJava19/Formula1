@@ -4,8 +4,21 @@
  */
 
 interface IErgastService {
-  getDrivers(): angular.IPromise<any>;
-  getDriverDetails(id: string): angular.IPromise<any>;
+
+   /**
+   * peticion GET a servicio rest de http://ergast.com
+   * @see http://ergast.com/api/f1/2017/driverStandings.json
+   * @return Promesa con array de IDriverStandings
+   */
+  getDrivers(): angular.IPromise<IDriverStandings[]>;
+  /**
+   * peticion GET a servicio rest de http://ergast.com
+   * @see http://ergast.com/api/f1/2017/drivers/ + id + /driverStandings.json
+   * @return Promesa con IDriver
+   */
+  getDriverDetails(id: string): angular.IPromise<IDriver>;
+
+
   getDriverRaces(id: string): angular.IPromise<any>;
 
   /**
@@ -24,25 +37,25 @@ class ErgastService implements IErgastService {
     this.http = $http;
   }
 
-  public getDrivers = () => {
-    return this.http.get<any>("http://ergast.com/api/f1/2017/driverStandings.json").then(result => {
-      return result.data.MRData.StandingsTable.StandingsLists[0].DriverStandings;
+  public getDrivers = (): angular.IPromise<IDriverStandings[]> => {
+    return this.http.get("http://ergast.com/api/f1/2017/driverStandings.json").then(result => {
+      return result.data['MRData'].StandingsTable.StandingsLists[0].DriverStandings;
     });
   }
 
-  public getDriverDetails = id => {
+  public getDriverDetails = (id): angular.IPromise<IDriver> => {
     return this.http
-      .get<any>("http://ergast.com/api/f1/2017/drivers/" + id + "/driverStandings.json")
+      .get("http://ergast.com/api/f1/2017/drivers/" + id + "/driverStandings.json")
       .then(response => {
-        return response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings[0];
+        return response.data['MRData'].StandingsTable.StandingsLists[0].DriverStandings[0];
       });
   }
 
-  public getDriverRaces = id => {
+  public getDriverRaces = (id) => {
     return this.http
       .get<any>("http://ergast.com/api/f1/2017/drivers/" + id + "/results.json")
       .then(response => {
-        return response.data.MRData.RaceTable.Races;
+        return response.data['MRData'].RaceTable.Races;
       });
   }
 
