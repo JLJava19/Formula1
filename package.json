@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "angular": "^1.6.9"
+    "angular": "^1.8.3"
   },
   "devDependencies": {
     "@google/maps": "^1.0.2",
-    "@types/angular": "^1.6.43",
+    "@types/angular": "^1.8.4",
     "@types/angular-translate": "^2.16.0",
     "@types/angular-ui-router": "^1.1.40",
     "@types/googlemaps": "^3.38.0",
